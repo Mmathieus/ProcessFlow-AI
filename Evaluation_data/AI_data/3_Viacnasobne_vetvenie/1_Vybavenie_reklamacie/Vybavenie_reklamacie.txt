@@ -1,0 +1,24 @@
+Názov procesu: Vybavenie reklamácie
+
+Opis procesu:
+1. Zákazník predloží reklamovaný tovar s dokladom o kúpe.
+2. Reklamačný technik zaeviduje reklamáciu a vystaví reklamačný protokol.
+3. Reklamačný technik vykoná základnú kontrolu tovaru.
+4. Reklamačný technik posúdi reklamáciu:
+  4.1. Ak je reklamácia zjavne oprávnená:
+     4.1.1. Reklamačný technik informuje zákazníka o možnostiach riešenia.
+     4.1.2. Zákazník si vyberie spôsob riešenia:
+        4.1.2.1. Ak zákazník požaduje opravu:
+           4.1.2.1.1. Servisný technik vykoná opravu tovaru.
+        4.1.2.2. Ak zákazník požaduje výmenu:
+           4.1.2.2.1. Reklamačný technik vybaví výmenu za nový tovar.
+        4.1.2.3. Ak zákazník požaduje vrátenie peňazí:
+           4.1.2.3.1. Účtovník vráti peniaze zákazníkovi.
+  4.2. Ak reklamácia vyžaduje odborné posúdenie:
+     4.2.1. Servisný technik vykoná expertízu.
+     4.2.2. Na základe výsledku expertízy:
+        4.2.2.1. Ak je reklamácia uznaná:
+           4.2.2.1.1. Proces pokračuje krokom 4.1.
+        4.2.2.2. Ak je reklamácia zamietnutá:
+           4.2.2.2.1. Reklamačný technik informuje zákazníka o zamietnutí.
+5. Reklamačný technik uzavrie reklamačný proces v systéme.

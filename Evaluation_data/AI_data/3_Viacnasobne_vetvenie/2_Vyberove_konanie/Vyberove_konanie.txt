@@ -1,0 +1,21 @@
+Názov procesu: Výberové konanie
+
+Opis procesu:
+1. Personalista zverejní pracovnú ponuku a zhromažďuje životopisy.
+2. Personalista vykoná prvotný výber uchádzačov:
+  2.1. Ak uchádzač spĺňa základné kritériá:
+     2.1.1. Personalista pozve uchádzača na prvé kolo pohovoru.
+     2.1.2. Po absolvovaní pohovoru sa vyhodnotí jeho výsledok:
+        2.1.2.1. Ak uchádzač uspel v prvom kole:
+           2.1.2.1.1. Odborný hodnotiteľ vykoná odborné testovanie.
+           2.1.2.1.2. Manažér oddelenia vykoná záverečný pohovor.
+        2.1.2.2. Ak uchádzač neuspel:
+           2.1.2.2.1. Personalista informuje uchádzača o neúspešnosti.
+  2.2. Ak uchádzač nespĺňa základné kritériá:
+     2.2.1. Personalista informuje uchádzača o nezaradení do výberového konania.
+3. Po záverečnom pohovore sa vykoná konečné rozhodnutie:
+  3.1. Ak je uchádzač vybratý:
+     3.1.1. Personalista pripraví pracovnú ponuku.
+  3.2. Ak uchádzač nie je vybratý:
+     3.2.1. Personalista uzavrie jeho účasť vo výberovom konaní.
+4. Personalista uzavrie výberové konanie v systéme.

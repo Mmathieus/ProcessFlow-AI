@@ -1,0 +1,25 @@
+Názov procesu: Organizácia firemnej konferencie
+
+Opis procesu:
+1. Projektový koordinátor definuje ciele a rozsah konferencie.
+2. Projektový koordinátor zostaví harmonogram príprav.
+3. Po zostavení harmonogramu sa súbežne realizujú nasledujúce aktivity:
+  3.1. Obsahová príprava:
+     3.1.1. Projektový koordinátor osloví a potvrdí rečníkov.
+     3.1.2. Projektový koordinátor zostaví program konferencie.
+     3.1.3. Rečníci pripravia prezentácie a materiály.
+  3.2. Technická príprava:
+     3.2.1. Technický špecialista rezervuje priestory a techniku.
+     3.2.2. Technický špecialista zabezpečí ozvučenie a projekcie.
+     3.2.3. Technický špecialista pripraví konferenčné materiály.
+  3.3. Marketingová príprava:
+     3.3.1. PR manažér vytvorí propagačnú kampaň.
+     3.3.2. PR manažér spustí registráciu účastníkov.
+     3.3.3. PR manažér distribuuje pozvánky a informačné materiály.
+  3.4. Logistická príprava:
+     3.4.1. Finančný kontrolór zabezpečí rozpočet a platby.
+     3.4.2. Vedúci cateringu objedná občerstvenie.
+     3.4.3. Projektový koordinátor zabezpečí ubytovanie pre hostí.
+4. Po dokončení všetkých súbežných aktivít projektový koordinátor vykoná finálnu kontrolu pripravenosti.
+5. Rečníci a organizačný tím realizujú konferenciu.
+6. Projektový koordinátor vyhodnotí úspešnosť konferencie.

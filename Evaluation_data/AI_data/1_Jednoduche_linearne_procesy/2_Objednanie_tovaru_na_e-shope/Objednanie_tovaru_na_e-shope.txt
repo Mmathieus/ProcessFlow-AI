@@ -1,0 +1,8 @@
+Názov procesu: Objednanie tovaru na e-shope
+
+Opis procesu:
+1. Zákazník vyberie požadovaný tovar a vloží ho do nákupného košíka.
+2. Zákazník vyplní dodacie a fakturačné údaje vo formulári objednávky.
+3. Zákazník zvolí spôsob platby a dopravy a potvrdí objednávku.
+4. Systém e-shopu overí dostupnosť tovaru a spracuje objednávku.
+5. Skladník pripraví tovar na expedíciu podľa objednávky.

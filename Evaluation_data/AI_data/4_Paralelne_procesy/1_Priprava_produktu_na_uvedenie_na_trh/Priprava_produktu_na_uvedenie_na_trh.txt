@@ -1,0 +1,20 @@
+Názov procesu: Príprava produktu na uvedenie na trh
+
+Opis procesu:
+1. Produktový manažér finalizuje špecifikácie produktu.
+2. Produktový manažér zaháji proces uvedenia produktu na trh.
+3. Po zahájení procesu sa súbežne realizujú nasledujúce aktivity:
+  3.1. Výrobná časť:
+     3.1.1. Výrobný manažér pripraví výrobnú linku.
+     3.1.2. Výrobný manažér spustí výrobu prvej série produktu.
+     3.1.3. Kontrolór kvality vykoná kontrolu kvality produktu.
+  3.2. Balenie a logistika:
+     3.2.1. Grafický dizajnér navrhne finálny obal produktu.
+     3.2.2. Vedúci logistiky zabezpečí materiál na balenie.
+     3.2.3. Vedúci logistiky pripraví distribučné kanály.
+  3.3. Marketing:
+     3.3.1. Marketingový špecialista vytvorí marketingovú stratégiu.
+     3.3.2. Marketingový špecialista pripraví propagačné materiály.
+     3.3.3. Marketingový špecialista naplánuje uvedenie na sociálnych sieťach.
+4. Po dokončení všetkých súbežných aktivít produktový manažér vyhodnotí pripravenosť produktu.
+5. Produktový manažér schváli uvedenie produktu na trh.

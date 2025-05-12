@@ -1,0 +1,15 @@
+Názov procesu: Testovanie softverovej funkcionality
+
+Opis procesu:
+1. Vývojár implementuje novú funkcionalitu podľa technickej špecifikácie.
+2. Vývojár odovzdá kód Testerovi na testovanie.
+3. Tester vykoná testovanie funkcionality podľa testovacích scenárov.
+4. Tester vyhodnotí výsledky testov:
+   4.1. Ak testy prejdú úspešne - pokračuje krokom 6.
+   4.2. Ak sú identifikované chyby - pokračuje krokom 5.
+5. Tester vytvorí záznam o chybách a vráti funkcionalitu Vývojárovi na opravu, proces sa vráti na krok 1.
+6. Tester oznámi úspešné testovanie Produktovému manažérovi.
+7. Produktový manažér skontroluje funkcionalitu z hľadiska užívateľských požiadaviek:
+   7.1. Ak funkcionalita spĺňa požiadavky - pokračuje krokom 8.
+   7.2. Ak funkcionalita nespĺňa požiadavky - informuje Vývojára o potrebných zmenách a proces sa vráti na krok 1.
+8. Produktový manažér schváli funkcionalitu na nasadenie.

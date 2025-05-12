@@ -1,0 +1,14 @@
+Názov procesu: Schvaľovanie dovolenky
+
+Opis procesu:
+1. Zamestnanec vyplní formulár žiadosti o dovolenku.
+2. Zamestnanec odošle žiadosť svojmu priamemu nadriadenému.
+3. Priamy nadriadený posúdi žiadosť a dostupný zostatok dovolenky.
+   3.1. Ak je žiadosť schválená:
+      3.1.1. Priamy nadriadený postúpi schválenú žiadosť personalistovi.
+      3.1.2. Personalista zaznamená dovolenku do systému.
+      3.1.3. Personalista informuje zamestnanca o schválení dovolenky.
+   3.2. Ak je žiadosť zamietnutá:
+      3.2.1. Priamy nadriadený poskytne zamestnancovi odôvodnenie zamietnutia.
+      3.2.2. Zamestnanec môže prepracovať žiadosť a znovu ju predložiť (návrat na krok 1).
+4. Proces končí zaznamenaním rozhodnutia v personálnom systéme.

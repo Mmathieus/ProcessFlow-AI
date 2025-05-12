@@ -1,0 +1,21 @@
+Názov procesu: Prijímanie nového zamestnanca
+
+Opis procesu:
+1. Personalista finalizuje pracovnú zmluvu s novým zamestnancom.
+2. Personalista spustí proces onboardingu.
+3. Po spustení procesu sa súbežne realizujú nasledujúce aktivity:
+  3.1. Administratívna časť:
+     3.1.1. Personalista pripraví osobný spis zamestnanca.
+     3.1.2. Personalista zadá údaje do personálneho systému.
+     3.1.3. Finančné oddelenie nastaví mzdové náležitosti.
+  3.2. IT príprava:
+     3.2.1. IT administrátor vytvorí používateľský účet.
+     3.2.2. IT administrátor pripraví pracovnú stanicu.
+     3.2.3. IT administrátor nastaví prístupy do systémov.
+  3.3. Príprava pracovného miesta:
+     3.3.1. Manažér oddelenia pripraví fyzické pracovné miesto.
+     3.3.2. Bezpečnostný technik zabezpečí prístupovú kartu.
+     3.3.3. Manažér oddelenia pripraví adaptačný plán.
+4. Po dokončení všetkých súbežných aktivít personalista oboznámi zamestnanca s dokumentmi a procedúrami.
+5. Manažér oddelenia vykoná úvodné zaškolenie.
+6. Zamestnanec na boarding začne pracovnú činnosť.

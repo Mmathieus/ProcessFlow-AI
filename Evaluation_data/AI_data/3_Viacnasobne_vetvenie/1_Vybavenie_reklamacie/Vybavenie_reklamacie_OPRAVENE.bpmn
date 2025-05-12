@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.6.1">
+  <bpmn:collaboration id="Collaboration_1">
+    <bpmn:participant id="Participant_1" name="Vybavenie reklamácie" processRef="Process_1" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_1">
+      <bpmn:lane id="Lane_Zakaznik" name="Zákazník">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_PredlozTovar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_VyberRiesenia</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_1</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_ReklamacnyTechnik" name="Reklamačný technik">
+        <bpmn:flowNodeRef>Task_ZaevidujReklamaciu</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_VykonajKontrolu</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_InformujOMoznostiach</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_PosudReklamaciu</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_UzavriReklamaciu</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_VybavVymenu</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_InformujOZamietnuti</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_ServisnyTechnik" name="Servisný technik">
+        <bpmn:flowNodeRef>Gateway_VysledokExpertizy</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_VykonajOpravu</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_VykonajExpertizu</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Uctovnik" name="Účtovník">
+        <bpmn:flowNodeRef>Task_VratPeniaze</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_1" name="Začiatok reklamácie">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Task_PredlozTovar" name="Predlož reklamovaný tovar s dokladom">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_ZaevidujReklamaciu" name="Zaeviduj reklamáciu a vystav protokol">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_VykonajKontrolu" name="Vykonaj základnú kontrolu tovaru">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_InformujOMoznostiach" name="Informuj zákazníka o možnostiach riešenia">
+      <bpmn:incoming>Flow_5</bpmn:incoming>
+      <bpmn:incoming>Flow_14</bpmn:incoming>
+      <bpmn:outgoing>Flow_6</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_PosudReklamaciu" name="Posúdenie reklamácie">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+      <bpmn:outgoing>Flow_5</bpmn:outgoing>
+      <bpmn:outgoing>Flow_11</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_VyberRiesenia" name="Výber spôsobu riešenia">
+      <bpmn:incoming>Flow_6</bpmn:incoming>
+      <bpmn:outgoing>Flow_8</bpmn:outgoing>
+      <bpmn:outgoing>Flow_9</bpmn:outgoing>
+      <bpmn:outgoing>Flow_10</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_VysledokExpertizy" name="Výsledok expertízy">
+      <bpmn:incoming>Flow_12</bpmn:incoming>
+      <bpmn:outgoing>Flow_13</bpmn:outgoing>
+      <bpmn:outgoing>Flow_14</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Task_PredlozTovar" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_PredlozTovar" targetRef="Task_ZaevidujReklamaciu" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Task_ZaevidujReklamaciu" targetRef="Task_VykonajKontrolu" />
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Task_VykonajKontrolu" targetRef="Gateway_PosudReklamaciu" />
+    <bpmn:sequenceFlow id="Flow_5" name="Zjavne oprávnená" sourceRef="Gateway_PosudReklamaciu" targetRef="Task_InformujOMoznostiach" />
+    <bpmn:sequenceFlow id="Flow_6" sourceRef="Task_InformujOMoznostiach" targetRef="Gateway_VyberRiesenia" />
+    <bpmn:sequenceFlow id="Flow_8" name="Oprava" sourceRef="Gateway_VyberRiesenia" targetRef="Task_VykonajOpravu" />
+    <bpmn:sequenceFlow id="Flow_9" name="Výmena" sourceRef="Gateway_VyberRiesenia" targetRef="Task_VybavVymenu" />
+    <bpmn:sequenceFlow id="Flow_10" name="Vrátenie peňazí" sourceRef="Gateway_VyberRiesenia" targetRef="Task_VratPeniaze" />
+    <bpmn:sequenceFlow id="Flow_11" name="Vyžaduje odborné posúdenie" sourceRef="Gateway_PosudReklamaciu" targetRef="Task_VykonajExpertizu" />
+    <bpmn:sequenceFlow id="Flow_12" sourceRef="Task_VykonajExpertizu" targetRef="Gateway_VysledokExpertizy" />
+    <bpmn:sequenceFlow id="Flow_13" name="Zamietnutá" sourceRef="Gateway_VysledokExpertizy" targetRef="Task_InformujOZamietnuti" />
+    <bpmn:sequenceFlow id="Flow_14" name="Uznaná" sourceRef="Gateway_VysledokExpertizy" targetRef="Task_InformujOMoznostiach" />
+    <bpmn:task id="Task_VykonajOpravu" name="Vykonaj opravu tovaru">
+      <bpmn:incoming>Flow_8</bpmn:incoming>
+      <bpmn:outgoing>Flow_15</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_UzavriReklamaciu" name="Uzavri reklamačný proces v systéme">
+      <bpmn:incoming>Flow_15</bpmn:incoming>
+      <bpmn:incoming>Flow_16</bpmn:incoming>
+      <bpmn:incoming>Flow_17</bpmn:incoming>
+      <bpmn:incoming>Flow_18</bpmn:incoming>
+      <bpmn:outgoing>Flow_19</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_1" name="Koniec reklamácie">
+      <bpmn:incoming>Flow_19</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_15" sourceRef="Task_VykonajOpravu" targetRef="Task_UzavriReklamaciu" />
+    <bpmn:sequenceFlow id="Flow_16" sourceRef="Task_VybavVymenu" targetRef="Task_UzavriReklamaciu" />
+    <bpmn:sequenceFlow id="Flow_17" sourceRef="Task_VratPeniaze" targetRef="Task_UzavriReklamaciu" />
+    <bpmn:sequenceFlow id="Flow_18" sourceRef="Task_InformujOZamietnuti" targetRef="Task_UzavriReklamaciu" />
+    <bpmn:sequenceFlow id="Flow_19" sourceRef="Task_UzavriReklamaciu" targetRef="EndEvent_1" />
+    <bpmn:task id="Task_VratPeniaze" name="Vráť peniaze zákazníkovi">
+      <bpmn:incoming>Flow_10</bpmn:incoming>
+      <bpmn:outgoing>Flow_17</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_VykonajExpertizu" name="Vykonaj expertízu">
+      <bpmn:incoming>Flow_11</bpmn:incoming>
+      <bpmn:outgoing>Flow_12</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_VybavVymenu" name="Vybav výmenu za nový tovar">
+      <bpmn:incoming>Flow_9</bpmn:incoming>
+      <bpmn:outgoing>Flow_16</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_InformujOZamietnuti" name="Informuj zákazníka o zamietnutí">
+      <bpmn:incoming>Flow_13</bpmn:incoming>
+      <bpmn:outgoing>Flow_18</bpmn:outgoing>
+    </bpmn:task>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
+      <bpmndi:BPMNShape id="Participant_1_di" bpmnElement="Participant_1" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="1200" height="720" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Uctovnik_di" bpmnElement="Lane_Uctovnik" isHorizontal="true">
+        <dc:Bounds x="190" y="620" width="1170" height="180" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_ServisnyTechnik_di" bpmnElement="Lane_ServisnyTechnik" isHorizontal="true">
+        <dc:Bounds x="190" y="440" width="1170" height="180" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_ReklamacnyTechnik_di" bpmnElement="Lane_ReklamacnyTechnik" isHorizontal="true">
+        <dc:Bounds x="190" y="250" width="1170" height="190" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Zakaznik_di" bpmnElement="Lane_Zakaznik" isHorizontal="true">
+        <dc:Bounds x="190" y="80" width="1170" height="170" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="242" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="225" y="205" width="70" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_PredlozTovar_di" bpmnElement="Task_PredlozTovar">
+        <dc:Bounds x="330" y="140" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ZaevidujReklamaciu_di" bpmnElement="Task_ZaevidujReklamaciu">
+        <dc:Bounds x="330" y="310" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_VykonajKontrolu_di" bpmnElement="Task_VykonajKontrolu">
+        <dc:Bounds x="480" y="310" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_InformujOMoznostiach_di" bpmnElement="Task_InformujOMoznostiach">
+        <dc:Bounds x="730" y="310" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_PosudReklamaciu_di" bpmnElement="Gateway_PosudReklamaciu" isMarkerVisible="true">
+        <dc:Bounds x="605" y="325" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="605" y="295" width="50" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_VyberRiesenia_di" bpmnElement="Gateway_VyberRiesenia" isMarkerVisible="true">
+        <dc:Bounds x="755" y="155" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="755" y="125" width="50" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_VysledokExpertizy_di" bpmnElement="Gateway_VysledokExpertizy" isMarkerVisible="true">
+        <dc:Bounds x="755" y="505" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="755" y="562" width="50" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_VykonajOpravu_di" bpmnElement="Task_VykonajOpravu">
+        <dc:Bounds x="930" y="490" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_UzavriReklamaciu_di" bpmnElement="Task_UzavriReklamaciu">
+        <dc:Bounds x="1080" y="310" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="1192" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1183" y="205" width="54" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_VratPeniaze_di" bpmnElement="Task_VratPeniaze">
+        <dc:Bounds x="950" y="670" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_VykonajExpertizu_di" bpmnElement="Task_VykonajExpertizu">
+        <dc:Bounds x="640" y="490" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_VybavVymenu_di" bpmnElement="Task_VybavVymenu">
+        <dc:Bounds x="930" y="260" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_InformujOZamietnuti_di" bpmnElement="Task_InformujOZamietnuti">
+        <dc:Bounds x="930" y="350" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="278" y="180" />
+        <di:waypoint x="330" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="380" y="220" />
+        <di:waypoint x="380" y="310" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="430" y="350" />
+        <di:waypoint x="480" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="580" y="350" />
+        <di:waypoint x="605" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <di:waypoint x="655" y="350" />
+        <di:waypoint x="730" y="350" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="655" y="332" width="75" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6">
+        <di:waypoint x="780" y="310" />
+        <di:waypoint x="780" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8">
+        <di:waypoint x="805" y="180" />
+        <di:waypoint x="850" y="180" />
+        <di:waypoint x="850" y="530" />
+        <di:waypoint x="930" y="530" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="873" y="512" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9">
+        <di:waypoint x="805" y="180" />
+        <di:waypoint x="860" y="180" />
+        <di:waypoint x="860" y="300" />
+        <di:waypoint x="930" y="300" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="875" y="282" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10_di" bpmnElement="Flow_10">
+        <di:waypoint x="805" y="180" />
+        <di:waypoint x="840" y="180" />
+        <di:waypoint x="840" y="710" />
+        <di:waypoint x="950" y="710" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="854" y="692" width="76" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11_di" bpmnElement="Flow_11">
+        <di:waypoint x="630" y="375" />
+        <di:waypoint x="630" y="530" />
+        <di:waypoint x="640" y="530" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="582" y="465" width="88" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12_di" bpmnElement="Flow_12">
+        <di:waypoint x="740" y="530" />
+        <di:waypoint x="755" y="530" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13_di" bpmnElement="Flow_13">
+        <di:waypoint x="805" y="530" />
+        <di:waypoint x="830" y="530" />
+        <di:waypoint x="830" y="390" />
+        <di:waypoint x="930" y="390" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="868" y="372" width="56" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14_di" bpmnElement="Flow_14">
+        <di:waypoint x="780" y="505" />
+        <di:waypoint x="780" y="390" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="785" y="445" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15_di" bpmnElement="Flow_15">
+        <di:waypoint x="1030" y="530" />
+        <di:waypoint x="1055" y="530" />
+        <di:waypoint x="1055" y="350" />
+        <di:waypoint x="1080" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16_di" bpmnElement="Flow_16">
+        <di:waypoint x="1030" y="300" />
+        <di:waypoint x="1055" y="300" />
+        <di:waypoint x="1055" y="350" />
+        <di:waypoint x="1080" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17_di" bpmnElement="Flow_17">
+        <di:waypoint x="1050" y="710" />
+        <di:waypoint x="1130" y="710" />
+        <di:waypoint x="1130" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18_di" bpmnElement="Flow_18">
+        <di:waypoint x="1030" y="390" />
+        <di:waypoint x="1055" y="390" />
+        <di:waypoint x="1055" y="350" />
+        <di:waypoint x="1080" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19_di" bpmnElement="Flow_19">
+        <di:waypoint x="1130" y="310" />
+        <di:waypoint x="1130" y="180" />
+        <di:waypoint x="1192" y="180" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

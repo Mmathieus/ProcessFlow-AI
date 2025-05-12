@@ -1,0 +1,25 @@
+Názov procesu: Vývoj softvéru
+
+Opis procesu:
+1. Produktový manažér definuje požiadavky na nový softvér.
+2. Projektový manažér vytvorí plán projektu a priradí zdroje.
+3. Analytik vykoná detailnú analýzu požiadaviek.
+4. Následne sa súbežne vykonávajú tieto aktivity:
+   4.1. Dizajnér vytvorí návrh architektúry systému.
+   4.2. Dizajnér pripraví návrh používateľského rozhrania.
+   4.3. Technický spisovateľ pripraví technickú dokumentáciu.
+   4.4. Technický spisovateľ vytvorí špecifikáciu API.
+5. Po dokončení všetkých návrhov a dokumentácie vývojár implementuje funkcionality.
+6. Tester realizuje testovanie, pričom môže vykonať jednu alebo viacero z nasledujúcich aktivít:
+   6.1. Jednotkové testovanie.
+   6.2. Integračné testovanie.
+   6.3. Výkonnostné testovanie.
+7. Po dokončení potrebných testov sa vyhodnotí kvalita kódu.
+8. Rozhodnutie na základe výsledkov testovania:
+   8.1. Ak boli nájdené chyby:
+      8.1.1. Vývojár opraví identifikované chyby.
+      8.1.2. Tester overí opravy, proces sa vráti na testovanie.
+   8.2. Ak neboli nájdené chyby:
+      8.2.1. Projektový manažér schváli vydanie softvéru.
+9. Produktový manažér potvrdí finálne vydanie.
+10. Projektový manažér uzavrie projekt vývoja.

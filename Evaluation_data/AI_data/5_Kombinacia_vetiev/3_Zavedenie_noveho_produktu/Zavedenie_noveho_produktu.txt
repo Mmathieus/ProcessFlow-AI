@@ -1,0 +1,31 @@
+Názov procesu: Zavedenie nového produktu
+
+Opis procesu:
+1. Produktový manažér predstaví koncept nového produktu.
+2. Finančný manažér vypracuje finančnú analýzu a prognózu.
+3. Vedenie spoločnosti posúdi koncept produktu:
+  3.1. V prípade schválenia konceptu:
+     3.1.1. Súbežne sa spustia tieto aktivity:
+        3.1.1.1. Vývojový tím vyvinie prototyp produktu.
+        3.1.1.2. Právnik zabezpečí právne náležitosti (patenty, ochranné známky).
+        3.1.1.3. Marketingový tím pripraví marketingovú stratégiu.
+  3.2. Ak koncept nie je schválený:
+     3.2.1. Produktový manažér ho prepracuje.
+     3.2.2. Proces sa vráti na krok 1.
+4. Po dokončení všetkých paralelných aktivít technický tím vykoná testovanie prototypu.
+5. Na základe výsledkov testovania sa podľa potreby vykonajú nasledujúce úpravy:
+  5.1. Vývojový tím upraví produkt podľa výsledkov testovania.
+  5.2. Marketingový tím reviduje marketingovú stratégiu.
+  5.3. Finančný manažér aktualizuje finančný plán.
+6. Po dokončení potrebných úprav vedenie spoločnosti rozhodne o finálnom schválení produktu:
+  6.1. V prípade schválenia produktu:
+     6.1.1. Súbežne sa realizujú tieto aktivity:
+        6.1.1.1. Technický tím pripraví výrobu/implementáciu.
+        6.1.1.2. Marketingový tím spustí marketingovú kampaň.
+        6.1.1.3. Manažér predaja pripraví predajný tím.
+     6.1.2. Po dokončení všetkých príprav:
+        6.1.2.1. Produktový manažér koordinuje uvedenie produktu na trh.
+        6.1.2.2. Manažér predaja začne aktívny predaj produktu.
+        6.1.2.3. Produktový manažér monitoruje úspešnosť produktu.
+  6.2. Ak produkt nie je schválený:
+     6.2.1. Produktový manažér projekt pozastaví alebo ukončí.

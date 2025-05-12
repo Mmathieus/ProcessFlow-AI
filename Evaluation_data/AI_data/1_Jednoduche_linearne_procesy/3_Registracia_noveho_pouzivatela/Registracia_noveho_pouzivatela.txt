@@ -1,0 +1,8 @@
+Názov procesu: Registrácia nového používateľa
+
+Opis procesu:
+1. Používateľ vyplní registračný formulár so základnými údajmi (meno, email, heslo).
+2. Používateľ potvrdí súhlas s podmienkami používania služby a odošle formulár.
+3. Systém registrácie overí platnosť a dostupnosť emailovej adresy.
+4. Systém registrácie odošle potvrdzovací email s aktivačným odkazom.
+5. Používateľ klikne na aktivačný odkaz v emaile pre dokončenie registrácie.

@@ -1,0 +1,15 @@
+Názov procesu: Posúdenie žiadosti o úver
+
+Opis procesu:
+1. Žiadateľ predloží žiadosť o úver bankovému poradcovi.
+2. Bankový poradca skontroluje úplnosť žiadosti a potrebných dokumentov.
+3. Bankový poradca zadá údaje do bankového systému.
+4. Úverový analytik vyhodnotí bonitu žiadateľa a riziko.
+   4.1. Ak žiadosť spĺňa podmienky:
+      4.1.1. Bankový poradca pripraví úverovú zmluvu.
+      4.1.2. Žiadateľ podpíše úverovú zmluvu.
+      4.1.3. Bankový poradca zabezpečí vyplatenie úveru.
+   4.2. Ak žiadosť nespĺňa podmienky:
+      4.2.1. Bankový poradca informuje žiadateľa o zamietnutí.
+      4.2.2. Bankový poradca zaznamená dôvody zamietnutia do systému.
+5. Proces končí archivovaním dokumentácie.

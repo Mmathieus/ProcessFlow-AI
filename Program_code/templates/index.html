@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProcessFlow AI</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+
+<!-- BPMN-JS libraries - used for visualizing and editing BPMN diagrams -->
+<link rel="stylesheet" href="https://unpkg.com/bpmn-js@18.3.1/dist/assets/diagram-js.css" />
+<link rel="stylesheet" href="https://unpkg.com/bpmn-js@18.3.1/dist/assets/bpmn-js.css" />
+<link rel="stylesheet" href="https://unpkg.com/bpmn-js@18.3.1/dist/assets/bpmn-font/css/bpmn.css" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+<div class="main-container">
+<!-- Main navigation tabs - Input (for text entry) and Model (for diagram visualization) -->
+<div class="main-tabs">
+    <div class="tabs-left">
+        <div class="tab active" id="input-tab-btn">Input</div>
+        <div class="tab" id="diagram-tab-btn">Model</div>
+    </div>
+    <div class="tabs-right">
+        <!-- Generation Statistics Dropdown (only shown when has statistics) -->
+        {% if input_tokens and output_tokens %}
+        <div class="stats-dropdown-wrapper hidden" id="stats-wrapper">
+            <button id="toggle-stats" class="stats-toggle-button">
+                <span class="button-icon">📊</span>
+                <span class="button-text">Statistics</span>
+            </button>
+            
+            <div id="generation-stats" class="stats-dropdown hidden">
+                <div class="stats-dropdown-content">
+                    <div class="stats-table">
+                        <div class="stats-row">
+                            <span class="stats-label">Model:</span>
+                            <span class="stats-value">{{ selected_model_name|default('Claude') }}</span>
+                        </div>
+                        <div class="stats-row">
+                            <span class="stats-label">Input tokens:</span>
+                            <span class="stats-value">{{ input_tokens }}</span>
+                        </div>
+                        <div class="stats-row">
+                            <span class="stats-label">Output tokens:</span>
+                            <span class="stats-value">{{ output_tokens }}</span>
+                        </div>
+                        <div class="stats-row">
+                            <span class="stats-label">Total tokens:</span>
+                            <span class="stats-value">{{ input_tokens + output_tokens }}</span>
+                        </div>
+                        <div class="stats-row">
+                            <span class="stats-label">Temperature:</span>
+                            <span class="stats-value">{{ temperature|default(0) }}</span>
+                        </div>
+                        <div class="stats-row">
+                            <span class="stats-label">Generation time:</span>
+                            <span class="stats-value">{{ generation_time|default('N/A') }} s</span>
+                        </div>
+                        <div class="stats-row">
+                            <span class="stats-label">Estimated cost:</span>
+                            <span class="stats-value">${{ "%.4f"|format(estimated_cost) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% elif generation_error %}
+        <!-- Error information dropdown for when generation fails -->
+        <div class="stats-dropdown-wrapper hidden" id="stats-wrapper">
+            <button id="toggle-stats" class="stats-toggle-button">
+                <span class="button-icon">⚠️</span>
+                <span class="button-text">Error Info</span>
+            </button>
+            
+            <div id="generation-stats" class="stats-dropdown hidden">
+                <div class="stats-dropdown-content">
+                    <div class="stats-error">
+                        <h4>Generation Error</h4>
+                        <p>{{ generation_error }}</p>
+                        <p class="error-details">Generation time: {{ generation_time|default('N/A') }} seconds</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Save Button (always defined but initially hidden) -->
+        <button id="save-bpmn" class="save-button hidden" {% if generation_error %}disabled{% endif %}>Save as BPMN</button>
+    </div>
+</div>
+
+<!-- Flash messages container for showing notifications to the user -->
+<div id="flash-container" class="flash-container">
+    <!-- Flask flash messages are processed through JavaScript -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flask-flash-message" data-type="{{ category }}" style="display: none;">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+
+<!-- Content area - contains both input form and diagram display -->
+<div class="content-area">
+    <!-- Input tab content -->
+    <div id="input-tab" class="tab-content active">
+        <div class="two-column-layout">
+            <!-- Left column for input types and text fields -->
+            <div class="left-column">
+                <!-- Input type switcher - toggle between structured and simple input modes -->
+                <div class="input-type-selector">
+                    <div class="input-type-tab active" id="structured-input-tab" role="tab" tabindex="0">Structured Input</div>
+                    <div class="input-type-tab" id="simple-input-tab" role="tab" tabindex="0">Simple Input</div>
+                </div>
+    
+                <!-- Input forms section -->
+                <div class="form-section">
+                    <form id="bpmn-form" method="post" enctype="multipart/form-data">
+                        <!-- Hidden input to track current mode -->
+                        <input type="hidden" id="input_mode" name="input_mode" value="STRUCTURED">
+                        
+                        <!-- Structured input section - Process Name and Flow fields -->
+                        <div id="structured-input-section" class="input-section">
+                            <div class="input-group">
+                                <div id="process-name-container">
+                                    <label for="structured_name_input"><b>Process Name:</b></label>
+                                    <div class="input-with-clear">
+                                        <input type="text" id="structured_name_input" name="structured_name_input" placeholder="Enter process name (e.g., 'Invoice Processing')" value="{{ full_name_input|default('') }}">
+                                        <button type="button" class="btn-clear-text" data-target="structured_name_input">×</button>
+                                    </div>
+                                </div>
+                                <div id="process-flow-container">
+                                    <label for="structured_flow_input"><b>Process Flow:</b></label>
+                                    <div class="textarea-with-clear">
+                                        <textarea id="structured_flow_input" name="structured_flow_input" placeholder="Describe the process steps, roles, and decision points...">{{ full_flow_input|default('') }}</textarea>
+                                        <button type="button" class="btn-clear-text" data-target="structured_flow_input">×</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!-- Simple input section - Single text area for process description -->
+                        <div id="simple-input-section" class="input-section hidden">
+                            <div class="input-group">
+                                <label for="simple_text_input"><b>Process Description:</b></label>
+                                <div class="textarea-with-clear">
+                                    <textarea id="simple_text_input" name="simple_text_input" placeholder="Describe the process steps, roles, and decision points...">{{ part_input_text|default('') }}</textarea>
+                                    <button type="button" class="btn-clear-text" data-target="simple_text_input">×</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Right column for configuration options -->
+            <div class="right-column">
+                <!-- AI Model selection -->
+                <div class="config-section">
+                    <h3 class="config-heading">Model Configuration</h3>
+                    
+                    <!-- Model control panel with dropdown Advanced Options -->
+                    <div class="model-controls-panel">
+                        <div class="model-selector-container">
+                            <!-- Dropdown for selecting the AI model -->
+                            <select id="model-selector" name="model_selection" class="model-selector">
+                                {% for model in available_models %}
+                                    <option value="{{ model.id }}" {% if selected_model == model.id %}selected{% endif %}>{{ model.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <!-- Advanced options dropdown for temperature and token settings -->
+                        <div class="advanced-options-wrapper">
+                            <button id="toggle-advanced-options" class="advanced-options-button">
+                                <span class="button-icon">⚙️</span>
+                                <span class="button-text">Advanced Options</span>
+                            </button>
+                            
+                            <div id="advanced-options" class="advanced-options-dropdown hidden">
+                                <!-- Temperature setting - controls creativity of the AI model -->
+                                <div class="advanced-option">
+                                    <label for="temperature-setting"><b>Temperature:</b></label>
+                                    <div class="range-with-value">
+                                        <input type="range" id="temperature-setting" name="temperature" min="0" max="1" step="0.1" value="0">
+                                        <span id="temperature-value">0</span>
+                                    </div>
+                                    <div class="option-description">Higher values make output more creative, lower values more deterministic</div>
+                                </div>
+                                <!-- Max tokens setting - limits the length of AI response -->
+                                <div class="advanced-option">
+                                    <label for="max-tokens-setting"><b>Max Tokens:</b></label>
+                                    <div class="token-input-container">
+                                        <div class="token-input-field">
+                                            <input type="number" id="max-tokens-setting" name="max_tokens" min="1" value="{{ max_tokens|default(10000) }}">
+                                        </div>
+                                        <div class="token-controls">
+                                            <div class="token-button" id="decrease-tokens">-</div>
+                                            <div class="token-button" id="increase-tokens">+</div>
+                                        </div>
+                                    </div>
+                                    <div class="option-description">Limit for the AI model's response</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- File upload section -->
+                <div class="config-section">
+                    <h3 class="config-heading">File Upload</h3>
+                    
+                    <!-- Structured file upload - shown when in structured mode -->
+                    <div class="file-upload-section" id="structured-file-upload-container">
+                        <!-- Filename area - only appears when not empty -->
+                        <div class="file-upload-info hidden" id="structured-selected-filename"></div>
+                        
+                        <!-- Drag & Drop area for files -->
+                        <div class="dropzone" id="structured-dropzone">
+                            <div class="dropzone-message">Drag & drop a text file here</div>
+                        </div>
+                        
+                        <!-- Controls with dynamic remove button -->
+                        <div class="file-upload-controls">
+                            <div class="file-upload-button">
+                                <span>Upload Text File</span>
+                                <input type="file" id="structured_file_input" name="file_input" accept=".txt">
+                            </div>
+                            <button type="button" id="structured-clear-file" class="btn-clear-file">Remove</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Simple file upload - shown when in simple mode -->
+                    <div class="file-upload-section hidden" id="simple-file-upload-container">
+                        <!-- Filename area - only appears when not empty -->
+                        <div class="file-upload-info hidden" id="selected-filename"></div>
+                        
+                        <!-- Drag & Drop area for files -->
+                        <div class="dropzone" id="simple-dropzone">
+                            <div class="dropzone-message">Drag & drop a text file here</div>
+                        </div>
+                        
+                        <!-- Controls with dynamic remove button -->
+                        <div class="file-upload-controls">
+                            <div class="file-upload-button">
+                                <span>Upload Text File</span>
+                                <input type="file" id="file_input" name="file_input" accept=".txt">
+                            </div>
+                            <button type="button" id="clear-file" class="btn-clear-file">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Generate button centered at the bottom -->
+        <div class="form-actions">
+            <button type="submit" id="generate-button" class="btn-primary" form="bpmn-form">Generate BPMN</button>
+        </div>
+    </div>
+    
+    <!-- Diagram tab content - shows the BPMN diagram -->
+    <div id="diagram-tab" class="tab-content hidden">
+        <!-- BPMN canvas taking full height -->
+        <div id="bpmn-canvas" class="diagram-canvas"></div>
+    </div>
+</div>
+</div>
+
+<!-- bpmn-js - Import BPMN modeler library -->
+<script src="https://unpkg.com/bpmn-js@18.3.1/dist/bpmn-modeler.development.js"></script>
+<script>
+let bpmnFilename = "{{ bpmn_filename|default('') }}";
+let currentInputMode = "{{ input_mode|default('SIMPLE') }}";
+</script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+<!-- Loading overlay - shown when generating diagram -->
+<div id="loading-overlay" class="hidden">
+    <div class="loading-content">
+        <h3>Generating BPMN Model</h3>
+        <p>Please wait...</p>
+        <div class="spinner"></div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+Tvoja úloha: Vytvor kompletný, korektný XML kód v štandarde BPMN 2.0 zo vstupných údajov na základe nižšie uvedených požiadaviek a ŠABLÓNY.
+
+Vstupné údaje:
+1. Názov procesu (ak neuvedený, vygeneruj ho na základe obsahu procesu alebo svojho dojmu)
+2. Flow procesu (aktivity, rozhodovania, roly, ich vzájomné prepojenia, (potencionálne názov procesu))
+3. Dodatočné údaje (individuálne požiadavky alebo poznámky používateľa)
+
+Kľúčové požiadavky:
+1. Model musí obsahovať:
+   - POOL (s názvom procesu)
+   - SWIM LANES (s názvami rolí, Lane pre každú rolu v procese)
+   - Správne priradenie aktivít príslušným rolám
+
+2. Formátovanie:
+   - Názvy aktivít v rozkazovacom spôsobe (Zavolaj..., Potvrď...)
+   - Jasné označenie rozhodovacích bodov, paralelných procesov, vetvení
+   - Priestranné a prehľadné rozmiestnenie (aby sa elementy a názvy neprekrývali)
+
+3. Technické aspekty:
+    - Súradnice elementov musia rešpektovať veľkosť POOL-u
+    - Pri dlhších procesoch prispôsob veľkosť POOL-u tak, aby sa tam všetky elementy zmestili
+
+
+Ďalšie požiadavky:
+1. Ak sa stane, že nedokážeš vytvoriť model z txt opisu, tak nevytváraj žiadny .bpmn súbor, ale vráť odpoveď v tvare:
+    PROBLÉM - (v maximálne 10 vetách uvedieš v čom vidíš problém)
+
+
+ŠABLÓNA:
+- Ukážka ako konštruovať súbor
+- Počet častí/elementov závií od daného procesu
+
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+    xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+    xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+    xmlns:di="http://www.omg.org/spec/DD/20100524/DI"  
+    id="..." 
+    targetNamespace="http://bpmn.io/bpmn"
+    exporter="bpmn-js (https://demo.bpmn.io)"
+    exporterVersion="18.3.1">
+
+    <!-- Definícia Collaboration (Pool) -->
+    <bpmn:collaboration id="...">
+        <bpmn:participant id="..." name="..." processRef="..." />
+    </bpmn:collaboration>
+
+    <!-- Definícia Procesu -->
+    <bpmn:process id="..." isExecutable="...">
+        
+        <!-- Lane Set pre Swimlanes -->
+        <bpmn:laneSet id="...">
+            <bpmn:lane id="..." name="...">
+                <bpmn:flowNodeRef>...</bpmn:flowNodeRef>
+            </bpmn:lane>
+        </bpmn:laneSet>
+        
+        <!-- StartEvent -->
+        <bpmn:startEvent id="..." name="...">
+            <bpmn:outgoing>...</bpmn:outgoing>
+        </bpmn:startEvent>
+        
+        <!-- Task -->
+        <bpmn:task id="..." name="...">
+            <bpmn:incoming>...</bpmn:incoming>
+            <bpmn:outgoing>...</bpmn:outgoing>
+        </bpmn:task>
+        
+        <!-- Gateway -->
+        <bpmn:exclusiveGateway id="..." name="...">
+            <bpmn:incoming>...</bpmn:incoming>
+            <bpmn:outgoing>...</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        
+        <!-- EndEvent -->
+        <bpmn:endEvent id="..." name="...">
+            <bpmn:incoming>...</bpmn:incoming>
+        </bpmn:endEvent>
+
+        <!-- Toto boli iba ukážky jednoduchých elementov.
+             Ak to proces vyžaduje, použi všetky potrebné dostupné BPMN prvky
+        -->
+        
+        <!-- Sequence Flows -->
+        <bpmn:sequenceFlow id="..." sourceRef="..." targetRef="..." />
+    </bpmn:process>
+
+    <!-- Grafické informácie pre diagram -->
+    <bpmndi:BPMNDiagram id="...">
+        <bpmndi:BPMNPlane id="..." bpmnElement="...">
+            
+            <!-- Pool -->
+            <bpmndi:BPMNShape id="..." bpmnElement="..." isHorizontal="...">
+                <dc:Bounds x="X" y="..." width="Y" height="..." />
+                <bpmndi:BPMNLabel />
+            </bpmndi:BPMNShape>
+            
+            <!-- Lane -->
+            <bpmndi:BPMNShape id="..." bpmnElement="..." isHorizontal="...">
+                <dc:Bounds x="X+30" y="..." width="Y-30" height="..." />
+                <bpmndi:BPMNLabel />
+            </bpmndi:BPMNShape>
+
+            <!-- 
+                Pri Pool a Lane máš pri súradniciach [x,y] ako si to predstavujem
+                Je to dodržanie rozostupov a nepresiahnutia hlavného Pool-u
+            -->
+            
+            <!-- StartEvent -->
+            <bpmndi:BPMNShape id="..." bpmnElement="...">
+                <dc:Bounds x="..." y="..." width="..." height="..." />
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="..." y="..." width="..." height="..." />
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            
+            <!-- Task -->
+            <bpmndi:BPMNShape id="..." bpmnElement="...">
+                <dc:Bounds x="..." y="..." width="..." height="..." />
+                <bpmndi:BPMNLabel />
+            </bpmndi:BPMNShape>
+            
+            <!-- Gateway -->
+            <bpmndi:BPMNShape id="..." bpmnElement="..." isMarkerVisible="...">
+                <dc:Bounds x="..." y="..." width="..." height="..." />
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="..." y="..." width="..." height="..." />
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            
+            <!-- EndEvent -->
+            <bpmndi:BPMNShape id="..." bpmnElement="...">
+                <dc:Bounds x="..." y="..." width="..." height="..." />
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="..." y="..." width="..." height="..." />
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            
+            <!-- SequenceFlow -->
+            <bpmndi:BPMNEdge id="..." bpmnElement="...">
+                <di:waypoint x="..." y="..." />
+                <di:waypoint x="..." y="..." />
+            </bpmndi:BPMNEdge>
+        
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn:definitions>

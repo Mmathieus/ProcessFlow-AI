@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  processflow-ai:
+    build: .
+    container_name: processflow-ai
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./bpmn_files:/app/bpmn_files
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - SECRET_KEY=${SECRET_KEY:-default_secret_key}
+    restart: unless-stopped

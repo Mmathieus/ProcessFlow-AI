@@ -1,0 +1,8 @@
+Názov procesu: Schválenie dovolenky
+
+Opis procesu:
+1. Zamestnanec podáva žiadosť o dovolenku.
+2. Manažér posudzuje a schvaľuje žiadosť.
+3. HR oddelenie eviduje schválenú dovolenku v systéme.
+4. HR oddelenie informuje zamestnanca o schválení.
+5. Manažér aktualizuje tímový kalendár.

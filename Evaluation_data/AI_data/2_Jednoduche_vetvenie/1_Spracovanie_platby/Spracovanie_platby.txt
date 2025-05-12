@@ -1,0 +1,17 @@
+Názov procesu: Spracovanie platby
+
+Opis procesu:
+1. Zákazník predloží tovar na pokladňu.
+2. Predavač naskenuje tovar a oznámi celkovú cenu.
+3. Zákazník si vyberie spôsob platby.
+   3.1. Ak zákazník platí v hotovosti:
+      3.1.1. Zákazník odovzdá hotovosť predavačovi.
+      3.1.2. Predavač overí sumu a vydá prípadný zvyšok.
+      3.1.3. Predavač vystaví doklad o zaplatení.
+   3.2. Ak zákazník platí kartou:
+      3.2.1. Predavač aktivuje platobný terminál.
+      3.2.2. Zákazník vloží/priloží kartu a zadá PIN kód.
+      3.2.3. Systém spracovania platieb overí transakciu.
+      3.2.4. Predavač vytlačí doklad o zaplatení.
+4. Predavač odovzdá zákazníkovi nákup a doklad.
+5. Proces končí ukončením transakcie.

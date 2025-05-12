@@ -1,0 +1,15 @@
+Názov procesu: Schválenie dokumentu
+
+Opis procesu:
+1. Autor dokumentu vytvorí prvú verziu dokumentu.
+2. Autor dokumentu odošle dokument Recenzentovi na kontrolu.
+3. Recenzent skontroluje obsah dokumentu:
+   3.1. Ak je dokument v poriadku - pokračuje krokom 5.
+   3.2. Ak dokument obsahuje nedostatky - pokračuje krokom 4.
+4. Recenzent vráti dokument Autorovi s pripomienkami a proces sa vráti na krok 1.
+5. Recenzent odošle skontrolovaný dokument Manažérovi oddelenia na finálne schválenie.
+6. Manažér oddelenia posúdi dokument:
+   6.1. Ak je dokument v poriadku - pokračuje krokom 8.
+   6.2. Ak je potrebné dokument upraviť - pokračuje krokom 7.
+7. Manažér oddelenia vráti dokument Autorovi s komentármi a proces sa vráti na krok 1.
+8. Manažér oddelenia schváli dokument.

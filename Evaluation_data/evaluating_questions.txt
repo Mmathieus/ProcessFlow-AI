@@ -1,0 +1,41 @@
+Je potrebné posúvať hranice POOL?
+
+Sú všetky elementy pomenované?
+
+Krížia sa spojovacie čiary?
+
+Prekrývajú sa elementy navzájom?
+
+Sú rozostupy medzi elementami dostatočné?
+
+
+
+Je názov POOL správne pomenovaný?
+
+Zodpovedá počet LANES počtu rolí?
+
+Sú názvy LANES správne pomenované?
+
+Sú jednotlivé aktivity v správnych LANES?
+
+
+
+Sú všetky veci a činnosti zo vstupného opisu v modeli?
+
+Zodpovedajú názvy elementov vstupnému opisu?
+
+Sú v modeli voči vstupu pridané aj iné elementy?
+
+
+
+Je postupnosť aktivít logická?
+
+Sú rozhodovacie brány použité správne?
+
+Sú paralelné činnosti modelované správne?
+
+Má proces správny začiatok?
+
+Má proces správny koniec/konce?
+
+Je tok procesu sledovateľný?

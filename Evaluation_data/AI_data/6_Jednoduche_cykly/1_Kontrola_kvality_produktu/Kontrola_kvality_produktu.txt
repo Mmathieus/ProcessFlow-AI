@@ -1,0 +1,13 @@
+Názov procesu: Kontrola kvality produktu
+
+Opis procesu:
+1. Operátor výroby vyrobí sériu produktov na výrobnej linke.
+2. Technik kvality odoberie vzorku produktov na kontrolu.
+3. Technik kvality vykoná merania a testy podľa štandardov kvality.
+4. Technik kvality rozhodne, či produkt spĺňa požadované štandardy:
+   4.1. Ak produkt vyhovuje - pokračuje krokom 7.
+   4.2. Ak produkt nevyhovuje - pokračuje krokom 5.
+5. Technik kvality informuje Vedúceho výroby o nedostatkoch a potrebných úpravách.
+6. Vedúci výroby zabezpečí korekcie vo výrobnom procese a proces sa vráti na krok 1.
+7. Technik kvality schváli šaržu produktov a vydá certifikát kvality.
+8. Operátor výroby označí produkty ako skontrolované a presunie ich do skladu hotových výrobkov.

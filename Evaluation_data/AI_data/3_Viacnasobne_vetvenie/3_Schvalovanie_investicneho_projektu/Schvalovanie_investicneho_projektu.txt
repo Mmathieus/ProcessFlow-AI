@@ -1,0 +1,25 @@
+Názov procesu: Schvaľovanie investičného projektu
+
+Opis procesu:
+1. Projektový manažér vypracuje investičný zámer s rozpočtom.
+2. Finančný analytik vykoná finančnú analýzu projektu.
+3. Finančné posúdenie projektu:
+  3.1. Ak projekt spĺňa finančné kritériá:
+     3.1.1. Projektový manažér predloží projekt investičnému výboru.
+     3.1.2. Investičný výbor posúdi projekt:
+        3.1.2.1. Ak výbor schváli projekt:
+           3.1.2.1.1. Posúdenie podľa výšky investície:
+              3.1.2.1.1.1. Ak je investícia pod stanovený limit:
+                 3.1.2.1.1.1.1. Projekt dostáva povolenie k realizácii.
+              3.1.2.1.1.2. Ak je investícia nad stanovený limit:
+                 3.1.2.1.1.2.1. Projekt postupuje generálnemu riaditeľovi na schválenie.
+        3.1.2.2. Ak výbor zamietne projekt:
+           3.1.2.2.1. Projektový manažér dostane spätnú väzbu k projektu.
+  3.2. Ak projekt nespĺňa finančné kritériá:
+     3.2.1. Projektový manažér dostane spätnú väzbu od finančného analytika.
+4. Rozhodnutie o realizácii projektu:
+  4.1. Ak je projekt schválený:
+     4.1.1. Začína realizácia projektu podľa plánu.
+  4.2. Ak je projekt zamietnutý:
+     4.2.1. Projekt je ukončený alebo vrátený na prepracovanie.
+5. Projektový manažér aktualizuje stav projektu v systéme.

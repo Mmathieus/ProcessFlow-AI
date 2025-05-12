@@ -1,0 +1,29 @@
+Názov procesu: Spracovanie poistnej udalosti
+
+Opis procesu:
+1. Klient nahlási poistnú udalosť.
+2. Likvidátor zaeviduje udalosť a priradí číslo prípadu.
+3. Likvidátor vykoná základnú kontrolu údajov a dokumentov.
+4. Likvidátor určí typ poistnej udalosti:
+   4.1. V prípade štandardnej udalosti:
+      4.1.1. Likvidátor spracuje udalosť bežným postupom.
+   4.2. V prípade komplexnej udalosti:
+      4.2.1. Súbežne sa realizujú tieto činnosti:
+         4.2.1.1. Technik vykoná technické posúdenie škody.
+         4.2.1.2. Finančný analytik vykoná finančnú analýzu nároku.
+         4.2.1.3. Právnik posúdi právne aspekty udalosti.
+5. Po dokončení posudkov sa podľa potreby môžu realizovať nasledujúce doplňujúce kroky:
+   5.1. Likvidátor vyžiada dodatočné dokumenty od klienta.
+   5.2. Likvidátor zabezpečí posudok od externého odborníka.
+   5.3. Pri podozrení z podvodu likvidátor postúpi prípad na špeciálne vyšetrovanie.
+6. Po zozbieraní všetkých potrebných informácií likvidátor vyhodnotí oprávnenosť nároku.
+7. Likvidátor vyhodnotí oprávnenosť nároku:
+   7.1. Pri oprávnenom nároku:
+      7.1.1. Likvidátor vypočíta výšku poistného plnenia.
+      7.1.2. Manažér schváli poistné plnenie.
+      7.1.3. Finančný analytik zabezpečí výplatu plnenia klientovi.
+   7.2. Pri neoprávnenom nároku:
+      7.2.1. Likvidátor pripraví zamietavé stanovisko.
+      7.2.2. Manažér schváli zamietnutie nároku.
+      7.2.3. Likvidátor informuje klienta o zamietnutí.
+8. Likvidátor uzavrie prípad v systéme.
